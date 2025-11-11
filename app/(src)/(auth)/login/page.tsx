@@ -149,11 +149,11 @@ export default function LoginLayout({}: Readonly<{
                     />
                   </FormControl>
                 </div>
-                <div className="w-full flex justify-end">
+                {/* <div className="w-full flex justify-end">
                   <a href="#" className="underline">
                     Forgot password?
                   </a>
-                </div>
+                </div> */}
                 <div className="w-full">
                   {isValidEmail(email) && password && (
                     <Button
