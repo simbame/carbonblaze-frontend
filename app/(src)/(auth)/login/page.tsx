@@ -42,7 +42,6 @@ export default function LoginLayout({}: Readonly<{
       saveUser({
         email: user.email,
         token: user.token,
-        isLoggedIn: true,
       });
       router.push("/dashboard/overview");
     } catch (error) {

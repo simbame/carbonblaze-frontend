@@ -5,6 +5,12 @@ export interface User {
   email: string;
   password: string;
   token: string;
+  islogged: boolean;
+}
+
+export interface LoginState {
+  islogged: boolean;
+  messagee: string;
 }
 
 export type Inputs = {
@@ -15,7 +21,6 @@ export type Inputs = {
 export interface LocalStorageUser {
   email: string;
   token: string;
-  isLoggedIn: boolean;
   // Add any additional properties you need for local storage
 }
 

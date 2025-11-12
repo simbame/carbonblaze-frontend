@@ -1,5 +1,5 @@
 import axios from "axios";
-import { User } from "../(src)/common/types";
+import { User, LoginState } from "../(src)/common/types";
 
 const api = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_URL,
@@ -9,18 +9,6 @@ const api = axios.create({
   },
   withCredentials: true,
 });
-
-// import axios from "axios";
-// import { User } from "../(src)/common/types";
-
-// const api = axios.create({
-//   baseURL: process.env.NEXT_PUBLIC_API_URL,
-//   headers: {
-//     "Content-Type": "application/json",
-//     "Access-Control-Allow-Origin": "*",
-//   },
-//   withCredentials: true,
-// });
 
 export async function register(
   username: string,
@@ -37,6 +25,16 @@ export async function register(
 
 export async function login(email: string, password: string) {
   const res = await api.post<User>("/auth/login", { email, password });
+  return res.data;
+}
+
+export async function dashboard(token: string | undefined) {
+  const res = await api.get<LoginState>("auth/dashboard", {
+    headers: {
+      authorization: token,
+    },
+  });
+  console.log(res.data);
   return res.data;
 }
 

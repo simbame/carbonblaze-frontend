@@ -5,6 +5,8 @@ import React from "react";
 
 import { AppBar } from "../../components/AppBar";
 import { Header } from "@/app/components/Header";
+import { dashboard } from "@/app/services/api";
+import { getUser } from "@/app/localStorage/localStorage";
 
 export default function DashboardLayout({
   children,
@@ -13,21 +15,34 @@ export default function DashboardLayout({
 }) {
   const pathname = usePathname() ?? "";
   const urlSegment = pathname.substring(pathname.lastIndexOf("/") + 1);
-  const [loggedState, setLoggedState] = React.useState<boolean | null>(null);
+
+  const user = getUser();
+  const token = user?.token;
 
   React.useEffect(() => {
-    const loggedUser = window.localStorage.getItem("user");
-    const isLogged = loggedUser ? JSON.parse(loggedUser).isLoggedIn : false;
-    setLoggedState(isLogged);
+    let mounted = true;
 
-    if (!isLogged) {
-      window.location.href = "/login";
-    }
-  }, []);
+    (async () => {
+      try {
+        const data = await dashboard(token);
+        console.log(data);
+        const isLogged = data.islogged;
+        if (!isLogged && mounted) {
+          window.location.href = "/login";
+        }
+      } catch (error) {
+        console.error("You cannot open dashboard:", error);
+        alert("You are not signed in. Please sign in.");
+        if (mounted) {
+          window.location.href = "/login";
+        }
+      }
+    })();
 
-  if (loggedState === null) {
-    return null;
-  }
+    return () => {
+      mounted = false;
+    };
+  }, [token]);
 
   return (
     <>

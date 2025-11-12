@@ -9,6 +9,8 @@ export const saveUser = (users: LocalStorageUser) => {
 };
 
 export const getUser = (): LocalStorageUser | null => {
+  if (typeof window === "undefined") return null; // running on server
+
   try {
     const data = localStorage.getItem("user");
     if (data) {
