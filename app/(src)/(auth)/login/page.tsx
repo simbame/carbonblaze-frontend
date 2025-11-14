@@ -51,9 +51,14 @@ export default function LoginLayout({}: Readonly<{
   };
 
   const emailRegexp = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-zA-Z]+$/;
+  const passwordRegexp = /^.{8,}$/;
 
   const isValidEmail = (email: string) => {
     return emailRegexp.test(email);
+  };
+
+  const isValidPassword = (password: string) => {
+    return passwordRegexp.test(password);
   };
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
@@ -147,6 +152,11 @@ export default function LoginLayout({}: Readonly<{
                       }}
                     />
                   </FormControl>
+                  {!isValidPassword(password) && password && (
+                    <h6 className="text-red-600 text-left">
+                      Password must be more than 8 letters.
+                    </h6>
+                  )}
                 </div>
                 <div className="w-full flex justify-end">
                   <Tooltip
@@ -161,7 +171,7 @@ export default function LoginLayout({}: Readonly<{
                   </Tooltip>
                 </div>
                 <div className="w-full">
-                  {isValidEmail(email) && password && (
+                  {isValidEmail(email) && isValidPassword(password) && (
                     <Button
                       variant="contained"
                       sx={{ width: "100%" }}
@@ -171,7 +181,7 @@ export default function LoginLayout({}: Readonly<{
                       Sign in
                     </Button>
                   )}
-                  {(!isValidEmail(email) || !password) && (
+                  {(!isValidEmail(email) || !isValidPassword(password)) && (
                     <Tooltip
                       title="Please enter your email and password to Sign in"
                       placement="bottom-end"
