@@ -48,9 +48,14 @@ export default function LoginLayout({}: Readonly<{
   };
 
   const emailRegexp = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-zA-Z]+$/;
+  const passwordRegexp = /^.{8,}$/;
 
   const isValidEmail = (email: string) => {
     return emailRegexp.test(email);
+  };
+
+  const isValidPassword = (password: string) => {
+    return passwordRegexp.test(password);
   };
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
@@ -163,6 +168,11 @@ export default function LoginLayout({}: Readonly<{
                       }}
                     />
                   </FormControl>
+                  {!isValidPassword(password) && password && (
+                    <h6 className="text-red-600 text-left">
+                      Password must be more than 8 letters.
+                    </h6>
+                  )}
                 </div>
                 <div className="w-full">
                   <FormControl sx={{ width: "100%" }} variant="outlined">
