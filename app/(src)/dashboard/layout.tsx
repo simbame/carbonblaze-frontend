@@ -40,7 +40,7 @@ export default function DashboardLayout({
     })();
 
     return () => {
-      mounted = true;
+      mounted = false;
     };
   }, [token]);
 
