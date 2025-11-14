@@ -18,11 +18,15 @@ export const Header = () => {
           alt="Authorized by Simba"
           src="/img/dashboard/header1.png"
         ></Avatar>
-        <div onClick={logout}>
+        <div
+          onClick={logout}
+          className="flex flex-col items-center txt-main-color"
+        >
           <Avatar
             alt="Authorized by Simba"
             src="/img/dashboard/header2.jpg"
           ></Avatar>
+          <div className="text-center">Sign out</div>
         </div>
       </div>
     </div>

@@ -110,7 +110,7 @@ export default function LoginLayout({}: Readonly<{
                       setEmail(e.target.value);
                     }}
                   />
-                  {!isValidEmail(email) && (
+                  {!isValidEmail(email) && email && (
                     <h6 className="text-red-600 text-left">
                       This email is not available.
                     </h6>
@@ -148,11 +148,18 @@ export default function LoginLayout({}: Readonly<{
                     />
                   </FormControl>
                 </div>
-                {/* <div className="w-full flex justify-end">
-                  <a href="#" className="underline">
-                    Forgot password?
-                  </a>
-                </div> */}
+                <div className="w-full flex justify-end">
+                  <Tooltip
+                    title="Excuse me, this functionality has not implemented yet."
+                    placement="bottom-end"
+                    arrow
+                    PopperProps={popperProps}
+                  >
+                    <a href="#" className="underline">
+                      Forgot password?
+                    </a>
+                  </Tooltip>
+                </div>
                 <div className="w-full">
                   {isValidEmail(email) && password && (
                     <Button
@@ -166,7 +173,7 @@ export default function LoginLayout({}: Readonly<{
                   )}
                   {(!isValidEmail(email) || !password) && (
                     <Tooltip
-                      title="Please enter your email ID and password to Sign in"
+                      title="Please enter your email and password to Sign in"
                       placement="bottom-end"
                       arrow
                       PopperProps={popperProps}

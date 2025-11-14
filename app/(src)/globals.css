@@ -5,6 +5,8 @@
   --foreground: #171717;
   --primary-bg-color: #1d563d;
   --primary-banner-bg-color: #d0e0da;
+  background-color: white;
+  color: black;
 }
 
 .bg-color-made {

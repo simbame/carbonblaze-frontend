@@ -126,7 +126,7 @@ export default function LoginLayout({}: Readonly<{
                       setEmail(e.target.value);
                     }}
                   />
-                  {!isValidEmail(email) && (
+                  {!isValidEmail(email) && email && (
                     <h6 className="text-red-600 text-left">
                       This email is not available.
                     </h6>
@@ -217,7 +217,7 @@ export default function LoginLayout({}: Readonly<{
                     !confirmPassword ||
                     password !== confirmPassword) && (
                     <Tooltip
-                      title="Please enter your email ID and password to Sign in"
+                      title="Please enter your username, email and password"
                       placement="bottom-end"
                       arrow
                       PopperProps={popperProps}
